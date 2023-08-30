@@ -1,6 +1,17 @@
 const URL = 'https://fakestoreapi.com/products'
 
-fetch(URL)
-    .then(response => response.json())
-    .then(data => console.log(data))
+const layout = (products) => {
 
+}
+
+async function getProducts() {
+    const response = await fetch(URL);
+    return await response.json();
+}
+
+const init = async () => {
+    const products = await getProducts();
+    
+}
+
+init()
