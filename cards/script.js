@@ -5,30 +5,22 @@ async function getProducts() {
     return await response.json();
 }
 
-const layout = (products) => {
-    const section = document.getElementById("cards-section");
+const renderCards = (products) => {
     for (let i = 0; i < products.length; i++) {
-        const newDiv = document.createElement("div");   
-        const newTitle = document.createElement("h2");
-        const newImg = document.createElement("img");
-        const newParagraph = document.createElement("p");
-        newDiv.className = "product-card";
-        newParagraph.className = "product-card__description" ;
-        newImg.className = "product_card__img"
-        newTitle.className = "product-card__title"
-        section.appendChild(newDiv);
-        newDiv.appendChild(newTitle);
-        newDiv.appendChild(newImg);
-        newDiv.appendChild(newParagraph);
-        newTitle.innerText = products[i].title;
-        newImg.src = products[i].image;
-        newParagraph.innerText = products[i].description
+        const section = document.getElementById("cards-section")
+        section.innerHTML += `
+            <div class="product-card">
+                <h2 class="product-card__title">${products[i].title}</h2>
+                <img class="product_card__img" src="${products[i].image}" />
+                <p class="product-card__description">${products[i].description}</p>
+            </div>
+        `;
     }
 }
 
 const init = async () => {
     const products = await getProducts();
-    layout(products)
+    renderCards(products)
 }
 
 init()
